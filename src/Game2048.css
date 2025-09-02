@@ -1,0 +1,182 @@
+/* Game2048.css */
+.game-2048 {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background-color: #faf8ef;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.score-container {
+  background: #bbada0;
+  padding: 0.75rem 1.25rem;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  min-width: 100px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.score-label {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.score-value {
+  font-size: 1.5rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Add text shadow for depth */
+}
+
+.game-board {
+  background: #bbada0;
+  border-radius: 8px;
+  padding: 0.5rem;
+  position: relative;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  background: #bbada0;
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+.grid-cell {
+  background: rgba(238, 228, 218, 0.35);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.75rem;
+  font-weight: bold;
+  position: relative;
+  transition: all 0.15s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+}
+
+/* Tile animations */
+@keyframes appear {
+  0% {
+      opacity: 0;
+      transform: scale(0);
+  }
+  100% {
+      opacity: 1;
+      transform: scale(1);
+  }
+}
+
+@keyframes pop {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.1);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+
+.tile-new {
+  animation: appear 0.2s ease-in-out;
+}
+
+.tile-merged {
+  animation: pop 0.2s ease-in-out;
+}
+
+/* Game over overlay */
+.game-over {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(238, 228, 218, 0.9); /* Slightly more opaque */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  z-index: 10;
+  animation: fadeIn 0.8s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.game-over-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #776e65;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Add text shadow */
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+/* Instructions */
+.instructions {
+  text-align: center;
+  color: #776e65;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(238, 228, 218, 0.5);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styles */
+.game-button {
+  background: #8f7a66;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.game-button:hover {
+  background: #7f6a56;
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.game-button:active {
+  transform: translateY(1px); /* Press effect */
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .grid-cell {
+      font-size: 1.25rem;
+  }
+  
+  .score-container {
+      padding: 0.5rem 1rem;
+  }
+  
+  .game-over-text {
+      font-size: 2rem;
+  }
+}

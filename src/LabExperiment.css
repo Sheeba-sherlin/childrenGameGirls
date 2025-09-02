@@ -1,0 +1,742 @@
+/* Virtual Science Lab Styles - Complete and Fixed */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 100vh;
+    height: 100%;
+}
+
+/* Main Index Styles */
+.index-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.main-header {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    text-align: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
+.main-header h1 {
+    font-size: 3em;
+    color: #FFD700;
+    font-weight: bold;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+    margin-bottom: 15px;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { 
+        text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 20px rgba(255, 215, 0, 0.3); 
+    }
+    to { 
+        text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 30px rgba(255, 215, 0, 0.6); 
+    }
+}
+
+.main-header p {
+    font-size: 1.2em;
+    margin-bottom: 8px;
+}
+
+.language-toggle {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+.language-toggle:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.experiments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.experiment-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.experiment-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    border-color: rgba(255, 215, 0, 0.5);
+}
+
+.experiment-icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+    display: block;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { 
+        transform: translateY(0); 
+    }
+    40% { 
+        transform: translateY(-10px); 
+    }
+    60% { 
+        transform: translateY(-5px); 
+    }
+}
+
+.experiment-card h3 {
+    font-size: 1.8em;
+    color: #FFD700;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.experiment-card p {
+    font-size: 1em;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.difficulty-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.difficulty-badge.easy,
+.difficulty-badge.எளிது { 
+    background: linear-gradient(45deg, #4CAF50, #45a049); 
+    color: white;
+}
+
+.difficulty-badge.medium,
+.difficulty-badge.நடுத்தர { 
+    background: linear-gradient(45deg, #FF9800, #e68900); 
+    color: white;
+}
+
+.difficulty-badge.hard,
+.difficulty-badge.advanced,
+.difficulty-badge.மேம்பட்ட { 
+    background: linear-gradient(45deg, #F44336, #d32f2f); 
+    color: white;
+}
+
+/* Experiment Page Styles */
+.experiment-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: none;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+.experiment-page.active {
+    display: block;
+}
+
+.experiment-header {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
+.experiment-header h1 {
+    font-size: 2.5em;
+    color: #FFD700;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.experiment-header p {
+    font-size: 1.2em;
+}
+
+.back-button {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.back-button:hover {
+    transform: translateY(-50%) translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.experiment-header .language-toggle {
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+.content-section {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+.lab-container {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px auto;
+    position: relative;
+    min-height: 600px;
+    max-width: 1200px;
+    overflow: visible;
+}
+
+.lab-canvas {
+    width: 100%;
+    height: 500px;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.controls-panel {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.control-button {
+    background: linear-gradient(45deg, #4ECDC4, #44A08D);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.control-button:hover:not(:disabled):not(.disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.control-button:disabled,
+.control-button.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    background: linear-gradient(45deg, #999, #666);
+}
+
+.observation-panel {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    border-left: 5px solid #4ECDC4;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.observation-panel h4 {
+    color: #4ECDC4;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.measurements-table {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.measurements-table h4 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.measurements-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.measurements-table th, 
+.measurements-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.measurements-table th {
+    background: #4ECDC4;
+    color: white;
+    font-weight: bold;
+}
+
+.measurements-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.weight-display {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 10px 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* Circuit Styles */
+.circuit-container {
+    width: 500px;
+    height: 300px;
+    margin: 50px auto;
+    position: relative;
+    background: #1a1a1a;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.circuit-wire {
+    position: absolute;
+    background: #FFD700;
+    border-radius: 2px;
+}
+
+.battery {
+    width: 40px;
+    height: 80px;
+    background: linear-gradient(90deg, #333, #666);
+    border-radius: 5px;
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.battery::before {
+    content: '+';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #FFD700;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.battery::after {
+    content: '-';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #FFD700;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.resistor {
+    width: 60px;
+    height: 20px;
+    background: linear-gradient(90deg, #8B4513, #D2691E);
+    border-radius: 3px;
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: background 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.current-flow {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #00FF00;
+    border-radius: 50%;
+    animation: current-flow 2s linear infinite;
+    box-shadow: 0 0 10px #00FF00;
+}
+
+@keyframes current-flow {
+    0% { left: 90px; top: 90px; }
+    25% { left: 240px; top: 90px; }
+    50% { left: 240px; top: 186px; }
+    75% { left: 90px; top: 186px; }
+    100% { left: 90px; top: 90px; }
+}
+
+/* Pendulum Styles */
+.pendulum-container {
+    width: 400px;
+    height: 350px;
+    margin: 50px auto;
+    position: relative;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.pendulum-string {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform-origin: top center;
+    width: 2px;
+    height: 200px;
+    background: #FFD700;
+    transform: translateX(-50%);
+    transition: transform 0.05s linear;
+}
+
+.pendulum-bob {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, #FF6B6B, #FF8E53);
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Animations */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid #FFD700;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+/* Utility classes for state management */
+.hidden {
+    display: none !important;
+}
+
+.disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+    pointer-events: none;
+}
+
+/* Additional experiment-specific styles */
+.volcano-eruption {
+    animation: erupt 0.5s ease-out;
+}
+
+@keyframes erupt {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.spring-extension {
+    transition: height 0.5s ease-in-out;
+}
+
+.circuit-active {
+    background: linear-gradient(45deg, #00FF00, #32CD32) !important;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+}
+
+.pendulum-active .pendulum-string {
+    animation: pendulum-swing 2s ease-in-out infinite;
+}
+
+@keyframes pendulum-swing {
+    0%, 100% { transform: translateX(-50%) rotate(45deg); }
+    50% { transform: translateX(-50%) rotate(-45deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-header h1 { 
+        font-size: 2.2em; 
+    }
+    
+    .experiments-grid { 
+        grid-template-columns: 1fr; 
+        padding: 20px; 
+        gap: 20px;
+    }
+    
+    .experiment-header h1 { 
+        font-size: 2em; 
+    }
+    
+    .experiment-header {
+        padding: 15px;
+    }
+    
+    .back-button {
+        position: relative;
+        left: 0;
+        top: 0;
+        transform: none;
+        margin-bottom: 15px;
+        display: block;
+        width: fit-content;
+    }
+    
+    .experiment-header .language-toggle {
+        position: relative;
+        top: 0;
+        right: 0;
+        transform: none;
+        margin-bottom: 15px;
+        display: block;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .lab-canvas { 
+        height: 400px; 
+    }
+    
+    .circuit-container, 
+    .pendulum-container {
+        width: 90%;
+        max-width: 400px;
+    }
+    
+    .controls-panel {
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .control-button {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+    
+    .measurements-table {
+        overflow-x: auto;
+    }
+    
+    .measurements-table table {
+        min-width: 500px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-header {
+        padding: 20px 15px;
+    }
+    
+    .main-header h1 {
+        font-size: 1.8em;
+    }
+    
+    .language-toggle {
+        position: relative !important;
+        top: 0 !important;
+        right: 0 !important;
+        transform: none !important;
+        margin-bottom: 15px;
+        display: block;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .experiments-grid {
+        padding: 15px;
+    }
+    
+    .experiment-card {
+        padding: 20px;
+    }
+    
+    .experiment-icon {
+        font-size: 3em;
+    }
+    
+    .experiment-card h3 {
+        font-size: 1.5em;
+    }
+    
+    .content-section {
+        padding: 10px;
+    }
+    
+    .lab-container {
+        padding: 15px;
+    }
+    
+    .lab-canvas {
+        height: 300px;
+    }
+    
+    .circuit-container {
+        width: 95%;
+        height: 250px;
+        padding: 15px;
+    }
+    
+    .pendulum-container {
+        width: 95%;
+        height: 280px;
+    }
+    
+    .controls-panel {
+        gap: 8px;
+    }
+    
+    .control-button {
+        padding: 8px 12px;
+        font-size: 0.8em;
+    }
+    
+    .observation-panel {
+        padding: 15px;
+        max-height: 150px;
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .experiment-icon {
+        animation: none;
+    }
+    
+    .current-flow {
+        animation: none;
+        display: none;
+    }
+    
+    .pendulum-string {
+        transition: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .experiment-card {
+        border: 3px solid white;
+    }
+    
+    .control-button {
+        border: 2px solid white;
+    }
+    
+    .back-button {
+        border: 2px solid white;
+    }
+    
+    .language-toggle {
+        border: 2px solid white;
+    }
+}
+
+/* Focus states for accessibility */
+button:focus,
+.experiment-card:focus {
+    outline: 3px solid #FFD700;
+    outline-offset: 2px;
+}

@@ -1,0 +1,321 @@
+/* Quiz Container */
+.quiz-container {
+  min-height: 60vh;
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  font-family: 'Arial', sans-serif;
+}
+
+.quiz-content {
+  background: white;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.quiz-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #4c51bf;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Language Selector Buttons */
+.language-selector {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.language-selector button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  background: linear-gradient(45deg, #6366f1, #4338ca);
+  flex: 1 1 45%;
+  max-width: 120px;
+  text-align: center;
+}
+
+.language-selector button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(99, 102, 241, 0.3);
+}
+
+.language-selector button.active {
+  background: linear-gradient(45deg, #10b981, #059669);
+  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.4);
+}
+
+/* Difficulty Selector */
+.difficulty-selector {
+  margin-bottom: 20px;
+}
+
+.difficulty-heading {
+  margin-bottom: 20px;
+  color: #4b5563;
+  font-size: 1.2rem;
+}
+
+.difficulty-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.beginner-btn {
+  background: linear-gradient(45deg, #4ade80, #22c55e);
+  color: white;
+}
+
+.medium-btn {
+  background: linear-gradient(45deg, #fbbf24, #f59e0b);
+  color: white;
+}
+
+.hard-btn {
+  background: linear-gradient(45deg, #ef4444, #dc2626);
+  color: white;
+}
+
+.difficulty-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Question Card */
+.question-card {
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  border: 2px solid #e2e8f0;
+}
+
+.question-number {
+  color: #6b7280;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.question-text {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #1f2937;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+/* Options */
+.options-grid {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.option-btn {
+  padding: 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  background: white;
+  color: #374151;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.option-btn:hover {
+  background: #f3f4f6;
+  border-color: #6366f1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.option-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.option-btn.selected-correct {
+  background: linear-gradient(45deg, #10b981, #059669);
+  color: white;
+  border-color: #10b981;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3);
+}
+
+.option-btn.selected-wrong {
+  background: linear-gradient(45deg, #ef4444, #dc2626);
+  color: white;
+  border-color: #ef4444;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(239, 68, 68, 0.3);
+}
+
+/* Score Display */
+.score-display {
+  background: linear-gradient(45deg, #6366f1, #4338ca);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 20px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 15px 0;
+  display: inline-block;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Appreciation Message */
+.appreciation {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 15px 0;
+  padding: 12px;
+  border-radius: 10px;
+  background: linear-gradient(45deg, #fbbf24, #f59e0b);
+  color: white;
+  animation: bounce 0.6s ease-in-out;
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+}
+
+@keyframes bounce {
+  0%, 20%, 60%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  80% { transform: translateY(-5px); }
+}
+
+/* Result Card */
+.result-card {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+  border-radius: 12px;
+  margin: 15px 0;
+  border: 2px solid #e0f2fe;
+}
+
+.result-score {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #0ea5e9;
+  margin: 15px 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.result-message {
+  font-size: 1.2rem;
+  margin: 15px 0;
+  color: #0f766e;
+  font-weight: 600;
+}
+
+.reset-btn {
+  background: linear-gradient(45deg, #8b5cf6, #7c3aed);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.reset-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(139, 92, 246, 0.3);
+}
+
+/* Confetti Animation */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--color);
+  left: var(--left);
+  animation: confetti-fall var(--duration) var(--delay) ease-out forwards;
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+/* Responsive Design */
+/* Responsive Design */
+@media (max-width: 400px) {
+  .quiz-content {
+    padding: 20px;
+    margin: 10px;
+  }
+  
+  .quiz-title {
+    font-size: 1.8rem;
+  }
+  
+  .difficulty-btn {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .question-text {
+    font-size: 1.1rem;
+  }
+  
+  .option-btn {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+  
+  .result-score {
+    font-size: 2rem;
+  }
+  
+  .result-message {
+    font-size: 1.1rem;
+  }
+
+  .language-selector button {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+}
