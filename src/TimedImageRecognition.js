@@ -125,6 +125,7 @@ const AppreciationModal = ({ isVisible, onClose, correctCount, level, language, 
             <span className="streak-text">{translations.perfectStreak}</span>
           </div>
         </div>
+        
         <button
           onClick={onClose}
           className="continue-button"
