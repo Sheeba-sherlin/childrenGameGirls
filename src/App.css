@@ -12,6 +12,33 @@
   --shadow-heavy: rgba(0, 0, 0, 0.3);
 }
 
+/* APK Optimization - Prevent zoom on mobile devices */
+* {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Re-enable text selection for specific elements that need it */
+input, textarea, .selectable-text {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Enhanced mobile touch handling */
+html {
+  height: 100%;
+  overflow-x: hidden;
+}
+
 /* Body Styling */
 body {
   font-family: 'Arial', sans-serif;
@@ -19,6 +46,12 @@ body {
   padding: 0;
   color: #333;
   overflow-x: hidden;
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Main Background with Animated Gradient */
@@ -230,28 +263,31 @@ body {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-/* Modal Styles */
+/* Modal Styles - FULLSCREEN FIXES */
 .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 9999 !important;
   background: linear-gradient(135deg, 
-    rgba(139, 92, 246, 0.95) 0%,
-    rgba(59, 130, 246, 0.95) 25%,
-    rgba(16, 185, 129, 0.95) 50%,
-    rgba(245, 158, 11, 0.95) 75%,
-    rgba(239, 68, 68, 0.95) 100%);
-  background-size: 400% 400%;
-  animation: modalGradientShift 10s ease infinite;
-  z-index: 1000;
+    rgba(139, 92, 246, 1) 0%,
+    rgba(59, 130, 246, 1) 25%,
+    rgba(16, 185, 129, 1) 50%,
+    rgba(245, 158, 11, 1) 75%,
+    rgba(239, 68, 68, 1) 100%) !important;
+  background-size: 400% 400% !important;
+  animation: modalGradientShift 10s ease infinite !important;
+  backdrop-filter: none !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 0;
-  overflow-y: auto;
-  backdrop-filter: blur(10px);
 }
 
 @keyframes modalGradientShift {
@@ -261,14 +297,20 @@ body {
 }
 
 .modal-content {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  background: transparent;
-  border-radius: 0;
-  overflow: visible;
-  display: flex;
-  flex-direction: column;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100vh !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  overflow: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
   animation: modalSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -288,7 +330,7 @@ body {
   position: fixed !important;
   top: 25px !important;
   left: 25px !important;
-  z-index: 1001 !important;
+  z-index: 10001 !important;
   background: linear-gradient(135deg, #ff6b6b, #ffd93d, #6bcf7f) !important;
   background-size: 200% 200% !important;
   color: white !important;
@@ -326,23 +368,27 @@ body {
   transform: translateY(-1px) scale(0.98) !important;
 }
 
-/* Game Fullscreen Wrapper */
+/* Game Fullscreen Wrapper - FIXED */
 .game-fullscreen-wrapper {
-  flex: 1;
-  width: 100%;
-  height: auto;
-  min-height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  background: transparent;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 80px 2rem 2rem 2rem;
-  box-sizing: border-box;
+  flex: 1 !important;
+  width: 100% !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  background: transparent !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  padding: 70px 0 0 0 !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
 }
 
 .game-fullscreen-wrapper::-webkit-scrollbar {
@@ -359,29 +405,111 @@ body {
   background: transparent;
 }
 
-/* Game Content Container */
+/* Game Content Container - FIXED */
 .game-fullscreen-wrapper > * {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  animation: gameContentSlideIn 0.6s ease-out;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 1rem !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  border: none !important;
+  animation: none !important;
+  flex: 1 !important;
+  min-height: calc(100vh - 70px) !important;
 }
 
-@keyframes gameContentSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Geography Game Integration */
+.geography-game-wrapper {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: transparent;
+}
+
+.geography-game-wrapper .game-container {
+  background: transparent !important;
+  min-height: 100% !important;
+}
+
+.geography-game-wrapper .menu-screen {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.geography-game-wrapper .playing-screen {
+  background: transparent !important;
+  padding: 1rem !important;
+}
+
+.geography-game-wrapper .complete-screen {
+  background: transparent !important;
+}
+
+/* Fix the game layout to use full space */
+.geography-game-wrapper .game-wrapper {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 1rem !important;
+  min-height: calc(100vh - 70px) !important;
+}
+
+/* Make game header blend with background */
+.geography-game-wrapper .game-header {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 20px !important;
+  padding: 1rem 2rem !important;
+  margin-bottom: 1rem !important;
+}
+
+/* Make sidebar cards semi-transparent */
+.geography-game-wrapper .stat-card,
+.geography-game-wrapper .drag-container {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Make map container more visible */
+.geography-game-wrapper .map-container {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 3px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Adjust text colors for better visibility */
+.geography-game-wrapper .map-name,
+.geography-game-wrapper .question-info {
+  color: white !important;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5) !important;
+}
+
+.geography-game-wrapper .stat-title {
+  color: white !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+.geography-game-wrapper .drag-title {
+  color: white !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Enhanced confetti for better performance on mobile */
+.confetti-canvas {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+  z-index: 2000 !important;
 }
 
 /* Button Enhancements */
@@ -478,11 +606,25 @@ button:active {
   }
   
   .game-fullscreen-wrapper {
-    padding: 70px 1rem 1rem 1rem;
+    padding: 60px 0 0 0 !important;
   }
   
   .game-fullscreen-wrapper > * {
-    padding: 1.5rem;
+    padding: 0.5rem !important;
+    min-height: calc(100vh - 60px) !important;
+  }
+  
+  .geography-game-wrapper .game-wrapper {
+    padding: 0.5rem !important;
+    min-height: calc(100vh - 60px) !important;
+  }
+  
+  .modal-overlay {
+    padding: 0 !important;
+  }
+  
+  .modal-content {
+    border-radius: 0 !important;
   }
 }
 
@@ -498,6 +640,135 @@ button:active {
   
   .game-icon h3 {
     font-size: 0.8rem;
+  }
+}
+
+/* Landscape orientation handling for mobile devices */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .main-container {
+    padding: 1rem 0.5rem;
+  }
+  
+  .header-section {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .main-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+  }
+  
+  .game-selection-prompt {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    padding: 0.8rem 1.5rem;
+  }
+  
+  .games-section {
+    padding: 1rem 0;
+  }
+  
+  .games-grid {
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .game-icon {
+    padding: 1rem 0.5rem;
+  }
+  
+  .game-icon span {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .back-btn {
+    top: 15px !important;
+    left: 15px !important;
+    padding: 10px 18px !important;
+    font-size: 14px !important;
+  }
+  
+  .game-fullscreen-wrapper {
+    padding: 50px 0 0 0 !important;
+  }
+  
+  .game-fullscreen-wrapper > * {
+    min-height: calc(100vh - 50px) !important;
+  }
+  
+  .geography-game-wrapper .game-wrapper {
+    min-height: calc(100vh - 50px) !important;
+  }
+}
+
+/* Performance optimizations for APK */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .gradientShift,
+  .modalGradientShift,
+  .backButtonPulse,
+  .titlePulse,
+  .titleGlow,
+  .promptPulse {
+    animation: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .game-icon,
+  .header-section,
+  .games-grid,
+  .footer-section {
+    border-width: 3px;
+    border-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .main-title,
+  .game-selection-prompt,
+  .quote-text {
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* Battery saving mode - reduce visual effects */
+@media (prefers-reduced-motion: reduce), (prefers-color-scheme: dark) {
+  .app-bg {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    animation: none;
+  }
+  
+  .modal-overlay {
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(59, 130, 246, 0.95)) !important;
+    animation: none !important;
+  }
+}
+
+/* Fix for safe areas on devices with notches */
+@supports (padding: max(0px)) {
+  .back-btn {
+    top: max(25px, env(safe-area-inset-top, 25px)) !important;
+    left: max(25px, env(safe-area-inset-left, 25px)) !important;
+  }
+  
+  .main-container {
+    padding-top: max(2rem, env(safe-area-inset-top, 2rem));
+    padding-left: max(1rem, env(safe-area-inset-left, 1rem));
+    padding-right: max(1rem, env(safe-area-inset-right, 1rem));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom, 1rem));
+  }
+  
+  .game-fullscreen-wrapper {
+    padding-top: max(70px, calc(70px + env(safe-area-inset-top, 0px))) !important;
+    padding-left: max(0px, env(safe-area-inset-left, 0px)) !important;
+    padding-right: max(0px, env(safe-area-inset-right, 0px)) !important;
+    padding-bottom: max(0px, env(safe-area-inset-bottom, 0px)) !important;
   }
 }
 
@@ -531,3 +802,832 @@ button:active {
 .mb-4 { margin-bottom: 1rem; }
 .font-medium { font-weight: 500; }
 .min-h-screen { min-height: 100vh; }
+/* HOMEPAGE SCROLL FIX - Add these rules to your existing App.css */
+
+/* Fix body scrolling for homepage */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  overflow: hidden !important; /* Changed from overflow-x: hidden to completely disable scrolling */
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Make app-bg non-scrollable */
+.app-bg {
+  min-height: 100vh;
+  max-height: 100vh !important; /* Prevent it from growing beyond viewport */
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  position: relative;
+  overflow: hidden !important; /* Disable scrolling on background */
+}
+
+/* Fix main container to prevent overflow */
+.main-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem; /* Reduced padding to fit content */
+  height: 100vh; /* Use full viewport height */
+  max-height: 100vh; /* Prevent overflow */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden !important; /* Prevent scrolling */
+  box-sizing: border-box;
+}
+
+/* Adjust header section to take less space */
+.header-section {
+  text-align: center;
+  margin-bottom: 1.5rem; /* Reduced from 3rem */
+  padding: 1.5rem; /* Reduced from 2rem */
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0; /* Don't shrink */
+}
+
+/* Make games section fit within viewport */
+.games-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0; /* Reduced from 2rem */
+  min-height: 0; /* Allow shrinking */
+  overflow: hidden; /* Prevent overflow */
+}
+
+/* Adjust games grid to fit */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Reduced from 200px */
+  gap: 1.5rem; /* Reduced from 2rem */
+  max-width: 1200px;
+  width: 100%;
+  padding: 1.5rem; /* Reduced from 2rem */
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  max-height: 100%; /* Prevent overflow */
+  overflow: hidden; /* No scrolling */
+}
+
+/* Adjust game icons to be more compact */
+.game-icon {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  padding: 1.5rem 0.8rem; /* Reduced padding */
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-icon span {
+  display: block;
+  font-size: 2.5rem; /* Reduced from 3rem */
+  margin-bottom: 0.8rem; /* Reduced from 1rem */
+  transition: transform 0.3s ease;
+}
+
+/* Adjust footer to take less space */
+.footer-section {
+  text-align: center;
+  padding: 1.5rem; /* Reduced from 2rem */
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 1rem; /* Reduced from 2rem */
+  flex-shrink: 0; /* Don't shrink */
+}
+
+/* Mobile adjustments for non-scrollable homepage */
+@media (max-width: 768px) {
+  .main-container {
+    padding: 0.8rem 0.5rem; /* Further reduced padding */
+  }
+  
+  .header-section {
+    padding: 1rem; /* Further reduced */
+    margin-bottom: 1rem;
+  }
+  
+  .games-section {
+    padding: 0.8rem 0;
+  }
+  
+  .games-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Smaller cards */
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .game-icon {
+    padding: 1.2rem 0.5rem;
+  }
+  
+  .game-icon span {
+    font-size: 2rem; /* Smaller icons */
+    margin-bottom: 0.6rem;
+  }
+  
+  .footer-section {
+    padding: 1rem;
+    margin-top: 0.8rem;
+  }
+  
+  /* Adjust title sizes for mobile */
+  .main-title {
+    font-size: clamp(1.8rem, 5vw, 2.5rem); /* Smaller on mobile */
+  }
+  
+  .game-selection-prompt {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    padding: 0.8rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .games-grid {
+    grid-template-columns: repeat(2, 1fr); /* Force 2 columns on small screens */
+    gap: 0.8rem;
+  }
+  
+  .game-icon span {
+    font-size: 1.8rem;
+  }
+  
+  .game-icon h3 {
+    font-size: 0.85rem;
+  }
+  
+  .main-container {
+    padding: 0.5rem;
+  }
+  
+  .header-section {
+    padding: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .footer-section {
+    padding: 0.8rem;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Landscape mode - make everything more compact */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .main-container {
+    padding: 0.5rem;
+  }
+  
+  .header-section {
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .main-title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: 0.5rem;
+  }
+  
+  .game-selection-prompt {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    padding: 0.6rem 1.2rem;
+  }
+  
+  .games-section {
+    padding: 0.5rem 0;
+  }
+  
+  .games-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns in landscape */
+    gap: 0.8rem;
+    padding: 0.8rem;
+  }
+  
+  .game-icon {
+    padding: 1rem 0.5rem;
+  }
+  
+  .game-icon span {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-section {
+    padding: 0.6rem;
+    margin-top: 0.3rem;
+  }
+  
+  .quote-text {
+    font-size: 0.8rem;
+  }
+}
+
+
+
+
+/* REDUCED PADDING FIX - Replace these sections in your App.css */
+
+/* Fix main container padding */
+.main-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.5rem; /* Significantly reduced from 1rem */
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden !important;
+  box-sizing: border-box;
+}
+
+/* Reduce header section padding */
+.header-section {
+  text-align: center;
+  margin-bottom: 0.8rem; /* Reduced from 1.5rem */
+  padding: 1rem; /* Reduced from 1.5rem */
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px; /* Slightly smaller radius */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+/* Reduce main title size for better fit */
+.main-title {
+  color: var(--white);
+  font-size: clamp(1.5rem, 4vw, 2.8rem); /* Reduced max size */
+  font-weight: 800;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 0.5rem; /* Reduced from 1rem */
+  animation: titlePulse 3s infinite, titleGlow 2s infinite;
+  background: linear-gradient(45deg, #ffffff, #f0f9ff, #dbeafe);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1; /* Tighter line height */
+}
+
+/* Adjust game selection prompt */
+.game-selection-prompt {
+  font-weight: 700;
+  font-size: clamp(1rem, 2.5vw, 1.4rem); /* Reduced size */
+  color: var(--white);
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.6rem 1.5rem; /* Reduced padding */
+  border-radius: 40px; /* Smaller radius */
+  display: inline-block;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  animation: promptPulse 2s infinite;
+  backdrop-filter: blur(5px);
+}
+
+/* Minimize games section padding */
+.games-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0; /* Minimal padding */
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Reduce games grid padding significantly */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Smaller min width */
+  gap: 1rem; /* Reduced gap */
+  max-width: 1200px;
+  width: 100%;
+  padding: 1rem; /* Reduced from 1.5rem */
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px; /* Smaller radius */
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  max-height: 100%;
+  overflow: hidden;
+}
+
+/* Make game icons more compact */
+.game-icon {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 15px; /* Smaller radius */
+  padding: 1rem 0.6rem; /* Significantly reduced padding */
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-icon span {
+  display: block;
+  font-size: 2.2rem; /* Slightly smaller */
+  margin-bottom: 0.5rem; /* Reduced margin */
+  transition: transform 0.3s ease;
+}
+
+.game-icon h3 {
+  color: #1f2937;
+  font-size: 0.85rem; /* Smaller text */
+  font-weight: 600;
+  margin: 0;
+  transition: color 0.3s ease;
+  line-height: 1.2;
+}
+
+/* Minimize footer padding */
+.footer-section {
+  text-align: center;
+  padding: 0.8rem; /* Reduced from 1.5rem */
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 0.5rem; /* Reduced margin */
+  flex-shrink: 0;
+}
+
+.quote-text {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(0.8rem, 1.8vw, 1rem); /* Smaller text */
+  line-height: 1.3; /* Tighter line height */
+  margin: 0;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile optimizations - even more compact */
+@media (max-width: 768px) {
+  .main-container {
+    padding: 0.3rem; /* Minimal padding */
+  }
+  
+  .header-section {
+    padding: 0.8rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .main-title {
+    font-size: clamp(1.3rem, 4vw, 2.2rem);
+    margin-bottom: 0.4rem;
+  }
+  
+  .game-selection-prompt {
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    padding: 0.5rem 1.2rem;
+  }
+  
+  .games-section {
+    padding: 0.4rem 0;
+  }
+  
+  .games-grid {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.8rem;
+    padding: 0.8rem;
+  }
+  
+  .game-icon {
+    padding: 0.8rem 0.4rem;
+  }
+  
+  .game-icon span {
+    font-size: 1.8rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .game-icon h3 {
+    font-size: 0.75rem;
+  }
+  
+  .footer-section {
+    padding: 0.6rem;
+    margin-top: 0.4rem;
+  }
+  
+  .quote-text {
+    font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .main-container {
+    padding: 0.2rem; /* Ultra minimal */
+  }
+  
+  .header-section {
+    padding: 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .games-grid {
+    grid-template-columns: repeat(2, 1fr); /* Force 2 columns */
+    gap: 0.6rem;
+    padding: 0.6rem;
+  }
+  
+  .game-icon {
+    padding: 0.6rem 0.3rem;
+  }
+  
+  .game-icon span {
+    font-size: 1.6rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .game-icon h3 {
+    font-size: 0.7rem;
+    line-height: 1.1;
+  }
+  
+  .footer-section {
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+  }
+}
+
+/* Landscape mode - ultra compact */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .main-container {
+    padding: 0.3rem;
+  }
+  
+  .header-section {
+    padding: 0.5rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .main-title {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    margin-bottom: 0.3rem;
+  }
+  
+  .game-selection-prompt {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    padding: 0.4rem 1rem;
+  }
+  
+  .games-section {
+    padding: 0.3rem 0;
+  }
+  
+  .games-grid {
+    grid-template-columns: repeat(5, 1fr); /* 5 columns in landscape */
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  
+  .game-icon {
+    padding: 0.5rem 0.2rem;
+  }
+  
+  .game-icon span {
+    font-size: 1.4rem;
+    margin-bottom: 0.2rem;
+  }
+  
+  .game-icon h3 {
+    font-size: 0.65rem;
+  }
+  
+  .footer-section {
+    padding: 0.4rem;
+    margin-top: 0.2rem;
+  }
+  
+  .quote-text {
+    font-size: 0.7rem;
+  }
+}
+
+
+
+/* GEOGRAPHY GAME FULL SCREEN FIX - Add/Replace these in your App.css */
+
+/* Complete modal overlay fix - block home background completely */
+.modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 10000 !important;
+  background: linear-gradient(135deg, 
+    #667eea 0%,
+    #764ba2 25%,
+    #f093fb 50%,
+    #f5576c 75%,
+    #4facfe 100%) !important;
+  background-size: 400% 400% !important;
+  animation: geographyGradientShift 12s ease infinite !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+/* New animation for geography game background */
+@keyframes geographyGradientShift {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 100% 50%; }
+  50% { background-position: 50% 100%; }
+  75% { background-position: 0% 0%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Modal content - complete full screen */
+.modal-content {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  max-height: 100vh !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  animation: none !important;
+  border: none !important;
+}
+
+/* Game wrapper - use full screen space */
+.game-fullscreen-wrapper {
+  flex: 1 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  max-height: 100vh !important;
+  overflow: hidden !important;
+  background: transparent !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  position: relative !important;
+}
+
+/* Game content - no white background, use full space */
+.game-fullscreen-wrapper > * {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  border: none !important;
+  animation: none !important;
+  flex: 1 !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+/* Geography game specific fixes */
+.geography-game-wrapper {
+  width: 100vw !important;
+  height: 100vh !important;
+  overflow: hidden !important;
+  background: transparent !important;
+  position: relative !important;
+}
+
+/* All game states should be full screen */
+.geography-game-wrapper .game-container {
+  background: transparent !important;
+  min-height: 100vh !important;
+  height: 100vh !important;
+  width: 100vw !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+.geography-game-wrapper .menu-screen,
+.geography-game-wrapper .playing-screen,
+.geography-game-wrapper .complete-screen {
+  background: transparent !important;
+  padding: 0 !important;
+  min-height: 100vh !important;
+  height: 100vh !important;
+  width: 100vw !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+/* Game wrapper styling */
+.geography-game-wrapper .game-wrapper {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 1rem !important;
+  min-height: 100vh !important;
+  height: 100vh !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
+}
+
+/* Enhanced back button - make it more visible */
+.back-btn {
+  position: fixed !important;
+  top: 20px !important;
+  left: 20px !important;
+  z-index: 10001 !important;
+  background: linear-gradient(135deg, #ff6b6b, #ffd93d, #6bcf7f) !important;
+  background-size: 200% 200% !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 50px !important;
+  padding: 12px 20px !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5) !important;
+  border: 2px solid rgba(255, 255, 255, 0.4) !important;
+  animation: backButtonPulse 2s infinite !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+/* Game header - semi-transparent overlay */
+.geography-game-wrapper .game-header {
+  background: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(25px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: 15px !important;
+  padding: 0.8rem 1.5rem !important;
+  margin: 0.8rem !important;
+  margin-bottom: 1rem !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Sidebar cards - better visibility */
+.geography-game-wrapper .stat-card,
+.geography-game-wrapper .drag-container {
+  background: rgba(255, 255, 255, 0.18) !important;
+  backdrop-filter: blur(25px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Map container - better contrast */
+.geography-game-wrapper .map-container {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(15px) !important;
+  border: 3px solid rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Map wrapper background */
+.geography-game-wrapper .map-wrapper {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-radius: 20px !important;
+  padding: 1rem !important;
+  backdrop-filter: blur(15px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Text colors for better visibility on new background */
+.geography-game-wrapper .map-name,
+.geography-game-wrapper .question-info {
+  color: white !important;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7) !important;
+  font-weight: 700 !important;
+}
+
+.geography-game-wrapper .stat-title,
+.geography-game-wrapper .drag-title {
+  color: white !important;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6) !important;
+  font-weight: 600 !important;
+}
+
+/* Menu content styling for geography game */
+.geography-game-wrapper .menu-content {
+  background: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(25px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Complete screen styling */
+.geography-game-wrapper .complete-content {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(25px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Confetti canvas - ensure it's on top */
+.confetti-canvas {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  pointer-events: none !important;
+  z-index: 10002 !important;
+}
+
+/* Mobile adjustments for geography game */
+@media (max-width: 768px) {
+  .back-btn {
+    top: 15px !important;
+    left: 15px !important;
+    padding: 10px 16px !important;
+    font-size: 13px !important;
+  }
+  
+  .geography-game-wrapper .game-header {
+    margin: 0.5rem !important;
+    padding: 0.6rem 1rem !important;
+  }
+  
+  .geography-game-wrapper .game-wrapper {
+    padding: 0.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .back-btn {
+    top: 12px !important;
+    left: 12px !important;
+    padding: 8px 14px !important;
+    font-size: 12px !important;
+  }
+  
+  .geography-game-wrapper .game-header {
+    margin: 0.4rem !important;
+    padding: 0.5rem 0.8rem !important;
+    border-radius: 12px !important;
+  }
+}
+
+/* Prevent any scrolling in geography game */
+.geography-game-wrapper,
+.geography-game-wrapper * {
+  -webkit-overflow-scrolling: auto !important;
+  overscroll-behavior: contain !important;
+}
+
+/* Fix for any potential overflow */
+.geography-game-wrapper .game-content {
+  max-height: calc(100vh - 120px) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}

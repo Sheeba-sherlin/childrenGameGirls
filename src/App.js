@@ -10,6 +10,7 @@ import MathQuiz from './MathQuiz';
 import GFGWordGame from './GFGWordGame';
 import ScienceQuiz from './ScienceQuiz';
 import LabExperiment from './LabExperiment';
+import GeographyMappping from './GeographyMapping';
 
 // Game Icon Component
 const GameIcon = ({ emoji, title, to }) => (
@@ -36,6 +37,7 @@ const GameSelection = () => (
     <GameIcon emoji="🔤" title="Word Guess Game" to="/wordGame" />
     <GameIcon emoji="🔬" title="Science Quiz" to="/scienceQuiz" />
     <GameIcon emoji="🧪" title="Lab Experiments" to="/labExperiments" />
+    <GameIcon emoji="🗺️" title="Maps" to ="/GeographyMapping"/>
   </div>
 );
 
@@ -87,6 +89,7 @@ function App() {
           <Route path="/wordGame" element={<GFGWordGame />} />
           <Route path="/scienceQuiz" element={<ScienceQuiz />} />
           <Route path="/labExperiments" element={<LabExperiment />} />
+          <Route path="GeographyMapping" element={<GeographyMappping/>} />
         </Routes>
       </div>
     </Router>
