@@ -37,6 +37,7 @@ body {
   justify-content: center;
   height: 100vh;
   overflow: hidden;
+  display: flex;
 }
 
 .menu-content {
@@ -162,6 +163,7 @@ body {
   padding: 1rem;
   height: 100vh;
   overflow: hidden;
+  display: flex;
 }
 
 .complete-content {
@@ -241,6 +243,7 @@ body {
   padding: 0.8rem;
   height: 100vh;
   overflow: hidden;
+  display: flex;
 }
 
 .confetti-canvas {
@@ -286,6 +289,7 @@ body {
 
 .back-button:hover {
   background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
 }
 
 .header-info {
@@ -381,6 +385,8 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.2);
   flex: 1;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .drag-title {
@@ -402,6 +408,7 @@ body {
   font-weight: 600;
   user-select: none;
   border: 2px solid rgba(255, 255, 255, 0.3);
+  margin-bottom: 0.5rem;
 }
 
 .drag-item:hover {
@@ -411,13 +418,16 @@ body {
 
 .drag-item:active {
   transform: scale(0.95);
+  cursor: grabbing;
 }
 
-/* Map Area */
+/* Map Area - FIXED FOR FULL VISIBILITY */
 .map-area {
   flex: 1;
   min-width: 0;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .map-wrapper {
@@ -431,18 +441,25 @@ body {
   position: relative;
   width: 100%;
   border-radius: 15px;
-  overflow: hidden;
   border: 3px solid rgba(255, 255, 255, 0.3);
   flex: 1;
   touch-action: none;
   min-height: 0;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .map-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(255, 255, 255, 0.05) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 50%, rgba(255, 255, 255, 0.02) 100%);
   pointer-events: none;
+  border-radius: 12px;
 }
 
 .map-label {
@@ -456,6 +473,7 @@ body {
   font-size: 0.8rem;
   font-weight: 600;
   backdrop-filter: blur(10px);
+  z-index: 20;
 }
 
 .marker {
@@ -472,10 +490,12 @@ body {
 
 .marker-correct {
   background: #51cf66;
+  animation: correctPulse 0.6s ease-out;
 }
 
 .marker-incorrect {
   background: #ff6b6b;
+  animation: incorrectShake 0.6s ease-out;
 }
 
 .marker-correct-hint {
@@ -486,29 +506,66 @@ body {
 @keyframes pulse {
   0%, 100% {
     transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
   }
   50% {
-    transform: translate(-50%, -50%) scale(1.2);
+    transform: translate(-50%, -50%) scale(1.3);
+    opacity: 0.7;
+  }
+}
+
+@keyframes correctPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes incorrectShake {
+  0%, 100% {
+    transform: translate(-50%, -50%) translateX(0);
+  }
+  25% {
+    transform: translate(-50%, -50%) translateX(-5px);
+  }
+  75% {
+    transform: translate(-50%, -50%) translateX(5px);
   }
 }
 
 .marker-tooltip {
   position: absolute;
-  top: -30px;
+  top: -35px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   color: white;
   font-size: 0.7rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: 4px;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
   white-space: nowrap;
   pointer-events: none;
   backdrop-filter: blur(10px);
+  z-index: 30;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.marker:hover .marker-tooltip {
+  opacity: 1;
 }
 
 .correct-tooltip {
   background: rgba(81, 207, 102, 0.9);
+}
+
+.incorrect-tooltip {
+  background: rgba(255, 107, 107, 0.9);
 }
 
 .drop-indicator {
@@ -521,6 +578,7 @@ body {
   border-radius: 8px;
   font-size: 0.75rem;
   backdrop-filter: blur(10px);
+  z-index: 20;
 }
 
 .feedback {
@@ -531,18 +589,41 @@ body {
   font-weight: 600;
   font-size: 0.9rem;
   flex-shrink: 0;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: feedbackSlideIn 0.4s ease-out forwards;
+}
+
+@keyframes feedbackSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .feedback-correct {
   background: rgba(81, 207, 102, 0.2);
   color: #51cf66;
-  border: 2px solid rgba(81, 207, 102, 0.3);
+  border: 2px solid rgba(81, 207, 102, 0.4);
 }
 
 .feedback-incorrect {
   background: rgba(255, 107, 107, 0.2);
   color: #ff6b6b;
-  border: 2px solid rgba(255, 107, 107, 0.3);
+  border: 2px solid rgba(255, 107, 107, 0.4);
+}
+
+/* Drag and Drop Enhancement */
+.map-container.drag-over {
+  background-color: rgba(102, 126, 234, 0.1) !important;
+  border-color: rgba(102, 126, 234, 0.5) !important;
+}
+
+.drag-item.dragging {
+  opacity: 0.5;
+  transform: rotate(5deg) scale(1.1);
+  z-index: 1000;
+  cursor: grabbing !important;
 }
 
 /* Mobile Responsive Styles */
@@ -563,6 +644,10 @@ body {
   
   .stat-value {
     font-size: 1.8rem;
+  }
+  
+  .map-container {
+    background-size: contain !important;
   }
 }
 
@@ -617,7 +702,7 @@ body {
   
   .drag-container {
     padding: 0.8rem;
-    min-height: 60px;
+    min-height: 80px;
   }
   
   .drag-title {
@@ -628,6 +713,7 @@ body {
   .drag-item {
     padding: 0.6rem 0.8rem;
     font-size: 0.8rem;
+    margin-bottom: 0.4rem;
   }
   
   .map-area {
@@ -636,26 +722,35 @@ body {
     min-height: 0;
   }
   
+  .map-container {
+    background-size: contain !important;
+    min-height: 250px;
+  }
+  
   .map-label {
     font-size: 0.7rem;
     padding: 0.3rem 0.6rem;
+    top: 0.6rem;
+    left: 0.6rem;
   }
   
   .marker {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     border-width: 2px;
   }
   
   .marker-tooltip {
     font-size: 0.6rem;
-    top: -25px;
-    padding: 0.15rem 0.4rem;
+    top: -30px;
+    padding: 0.2rem 0.4rem;
   }
   
   .drop-indicator {
     font-size: 0.65rem;
     padding: 0.3rem 0.6rem;
+    bottom: 0.6rem;
+    right: 0.6rem;
   }
   
   .feedback {
@@ -672,7 +767,10 @@ body {
   
   .language-toggle {
     position: relative;
+    top: auto;
+    right: auto;
     margin-bottom: 1rem;
+    display: inline-block;
   }
   
   .main-title {
@@ -773,20 +871,35 @@ body {
   
   .drag-container {
     padding: 0.6rem;
-    min-height: 50px;
+    min-height: 70px;
   }
   
   .drag-item {
     padding: 0.5rem 0.6rem;
     font-size: 0.75rem;
+    margin-bottom: 0.3rem;
   }
   
   .map-container {
     border-width: 2px;
+    background-size: contain !important;
+    min-height: 200px;
+  }
+  
+  /* Tamil Nadu mobile markers */
+  .marker[data-district] {
+    width: 12px;
+    height: 12px;
+    border-width: 2px;
+  }
+  
+  /* Hide Tamil text on very small screens */
+  .drag-item[data-district]::after {
+    display: none;
   }
   
   .feedback {
-    padding: 0.6rem 0.8rem;
+    padding: 0.5rem 0.7rem;
     font-size: 0.8rem;
     margin-top: 0.5rem;
   }
@@ -809,7 +922,15 @@ body {
   }
   
   .drag-container {
-    min-height: 80px;
+    min-height: 120px;
+  }
+  
+  .game-header {
+    margin-bottom: 0.5rem;
+  }
+  
+  .map-container {
+    background-size: contain !important;
   }
 }
 
@@ -821,15 +942,26 @@ body {
     user-select: none;
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: transparent;
+    padding: 1rem 1.2rem;
   }
   
   .drag-item:active {
     cursor: grabbing;
   }
   
+  .marker {
+    width: 20px;
+    height: 20px;
+  }
+  
   .marker-tooltip {
     display: block;
     opacity: 1;
+  }
+  
+  .map-container {
+    -webkit-overflow-scrolling: touch;
+    background-size: contain !important;
   }
 }
 
@@ -837,6 +969,7 @@ body {
 @media (prefers-contrast: high) {
   .marker {
     border-width: 4px;
+    border-color: #000;
   }
   
   .marker-tooltip {
@@ -845,6 +978,15 @@ body {
   }
   
   .drag-item {
+    border-width: 3px;
+    border-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .feedback-correct {
+    border-width: 3px;
+  }
+  
+  .feedback-incorrect {
     border-width: 3px;
   }
 }
@@ -864,6 +1006,25 @@ body {
   .confetti-canvas {
     display: none;
   }
+  
+  .drag-item:hover {
+    transform: none;
+  }
+  
+  .marker:hover {
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Focus states for accessibility */
+.drag-item:focus,
+.start-button:focus,
+.play-again-button:focus,
+.menu-button:focus,
+.back-button:focus,
+.language-toggle:focus {
+  outline: 3px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
 }
 
 /* Print styles */
@@ -887,4 +1048,46 @@ body {
     background: white !important;
     color: black !important;
   }
+  
+  .marker {
+    border-color: black;
+  }
+  
+  .map-container {
+    border-color: black;
+    background-size: contain !important;
+  }
+}
+
+/* Performance optimizations */
+.map-container,
+.drag-item,
+.marker {
+  will-change: transform;
+}
+
+.confetti-canvas {
+  will-change: transform, opacity;
+}
+
+/* Smooth scrolling for better UX */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading states */
+.map-container.loading {
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.map-container.loading::after {
+  content: 'Loading map...';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
 }

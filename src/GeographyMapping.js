@@ -5,49 +5,47 @@ import IndiaMap from './assets/IndiaMap.png';
 import IndianRiverMap from './assets/IndianRiverMap.png';
 import WorldMap from './assets/WorldMap.png';
 
-// Data for different maps with exact coordinates
+// Updated coordinates based on the map screenshots
 const tamilNaduPoints = [
-  { name: "Chennai", tamil: "சென்னை", top: "18%", left: "84%" },
-  { name: "Coimbatore", tamil: "கோயம்புத்தூர்", top: "66%", left: "30%" },
-  { name: "Madurai", tamil: "மதுரை", top: "77%", left: "52%" },
-  { name: "Trichy", tamil: "திருச்சி", top: "63%", left: "56%" },
-  { name: "Salem", tamil: "சேலம்", top: "48%", left: "44%" },
-  { name: "Kanyakumari", tamil: "கன்னியாகுமரி", top: "94%", left: "64%" },
-  { name: "Vellore", tamil: "வேலூர்", top: "30%", left: "56%" },
-  { name: "Tanjore", tamil: "தஞ்சாவூர்", top: "70%", left: "61%" }
+  { name: "Chennai", tamil: "சென்னை", top: "22%", left: "63%" },
+  { name: "Coimbatore", tamil: "கோயம்புத்தூர்", top: "52%", left: "39%" },
+  { name: "Madurai", tamil: "மதுரை", top: "57%", left: "47%" },
+  { name: "Salem", tamil: "சேலம்", top: "37%", left: "41%" },
+  { name: "Trichy", tamil: "திருச்சி", top: "43%", left: "50%" },
+  { name: "Vellore", tamil: "வேலூர்", top: "30%", left: "55%" },
+  { name: "Tanjore", tamil: "தஞ்சாவூர்", top: "48%", left: "59%" },
+  { name: "Kanyakumari", tamil: "கன்னியாகுமரி", top: "80%", left: "42%" }
 ];
 
-
-
 const indiaPoints = [
-  { name: "New Delhi", tamil: "புது டெல்லி", top: "25%", left: "42%" },
-  { name: "Mumbai", tamil: "மும்பை", top: "65%", left: "28%" },
-  { name: "Chennai", tamil: "சென்னை", top: "78%", left: "66%" },
-  { name: "Kolkata", tamil: "கொல்கத்தா", top: "38%", left: "80%" },
-  { name: "Bengaluru", tamil: "பெங்களூரு", top: "72%", left: "58%" },
-  { name: "Hyderabad", tamil: "ஹைதராபாத்", top: "65%", left: "55%" },
-  { name: "Jaipur", tamil: "ஜெய்ப்பூர்", top: "38%", left: "40%" },
-  { name: "Goa", tamil: "கோவா", top: "72%", left: "32%" }
+  { name: "New Delhi", tamil: "புது டெல்லி", top: "32%", left: "42.5%" },     // Capital, north-central position
+  { name: "Maharashtra", tamil: "மஹாராஷ்ட்ரா", top: "61%", left: "36%" },    // Western state, moved inward
+  { name: "TamilNadu", tamil: "தமிழ்நாடு", top: "83%", left: "44%" },           // Southeast coast, moved inward
+  { name: "WestBengal", tamil: "மேற்கு வங்காளம்", top: "48%", left: "60%" }, // Eastern state, moved inward
+  { name: "Karnataka", tamil: "கர்நாடகா", top: "72%", left: "39%" },        // South-central, moved inward
+  { name: "Telgana", tamil: "தெலங்கானா", top: "72%", left: "45%" },        // South-central, moved inward
+  { name: "Rajastan", tamil: "ராஜஸ்தான்", top: "39%", left: "37%" },        // Northwestern state, moved inward
+  { name: "Goa", tamil: "கோவா", top: "72%", left: "36%" }                  // Small state on west coast, moved inward
 ];
 
 const riverPoints = [
-  { name: "Ganga", tamil: "கங்கை", top: "32%", left: "62%" },
-  { name: "Yamuna", tamil: "யமுனை", top: "29%", left: "55%" },
-  { name: "Godavari", tamil: "கோதாவரி", top: "60%", left: "62%" },
-  { name: "Krishna", tamil: "கிருஷ்ணா", top: "68%", left: "60%" },
-  { name: "Kaveri", tamil: "காவேரி", top: "75%", left: "65%" },
-  { name: "Narmada", tamil: "நர்மதா", top: "55%", left: "38%" },
-  { name: "Brahmaputra", tamil: "பிரம்மபுத்திரா", top: "28%", left: "80%" }
+  { name: "Ganga",      tamil: "கங்கை",        top: "35.5%", left: "49%" },   // North-central, flowing from Himalayas
+  { name: "Yamuna",     tamil: "யமுனை",        top: "40%", left: "48.5%" },   // Northwest, tributary of Ganga
+  { name: "Brahmaputra",tamil: "பிரம்மபுத்திரா", top: "33%", left: "55%" },   // Northeast, flowing through Assam
+  { name: "Narmada",    tamil: "நர்மதா",       top: "47.5%", left: "45%" },   // Central India, flowing westward
+  { name: "Godavari",   tamil: "கோதாவரி",      top: "55%", left: "47%" },   // Central Deccan, flowing southeast
+  { name: "Krishna",    tamil: "கிருஷ்ணா",      top: "58%", left: "47%" },   // South-central, flowing east
+  { name: "Kaveri",     tamil: "காவேரி",       top: "68%", left: "45%" }    // Southern river, through Karnataka-Tamil Nadu
 ];
 
 const worldPoints = [
-  { name: "India", tamil: "இந்தியா", top: "52%", left: "66%" },
+  { name: "India", tamil: "இந்தியா", top: "48%", left: "66%" },
   { name: "USA", tamil: "அமெரிக்கா", top: "40%", left: "20%" },
   { name: "Australia", tamil: "ஆஸ்திரேலியா", top: "80%", left: "82%" },
-  { name: "China", tamil: "சீனா", top: "45%", left: "70%" },
+  { name: "China", tamil: "சீனா", top: "42%", left: "70%" },
   { name: "Brazil", tamil: "பிரேசில்", top: "70%", left: "32%" },
-  { name: "South Africa", tamil: "தென்னாப்பிரிக்கா", top: "88%", left: "50%" },
-  { name: "Egypt", tamil: "எகிப்து", top: "52%", left: "48%" }
+  { name: "South Africa", tamil: "தென்னாப்பிரிக்கா", top: "79%", left: "50%" },
+  { name: "Egypt", tamil: "எகிப்து", top: "48%", left: "48%" }
 ];
 
 const GeographyGame = () => {
@@ -71,25 +69,25 @@ const GeographyGame = () => {
     tamilnadu: {
       name: { english: "Tamil Nadu Map", tamil: "தமிழ்நாடு வரைபடம்" },
       points: tamilNaduPoints,
-      bgImage: `url(${TamilNaduMap})`, // Using imported image
+      bgImage: `url(${TamilNaduMap})`,
       bgColor: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%)"
     },
     india: {
       name: { english: "India Map", tamil: "இந்தியா வரைபடம்" },
       points: indiaPoints,
-      bgImage: `url(${IndiaMap})`, // Using imported image
+      bgImage: `url(${IndiaMap})`,
       bgColor: "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)"
     },
     rivers: {
       name: { english: "Indian Rivers Map", tamil: "இந்திய நதிகள் வரைபடம்" },
       points: riverPoints,
-      bgImage: `url(${IndianRiverMap})`, // Using imported image
+      bgImage: `url(${IndianRiverMap})`,
       bgColor: "linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)"
     },
     world: {
       name: { english: "World Map", tamil: "உலக வரைபடம்" },
       points: worldPoints,
-      bgImage: `url(${WorldMap})`, // Using imported image
+      bgImage: `url(${WorldMap})`,
       bgColor: "linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)"
     }
   };
@@ -277,7 +275,7 @@ const GeographyGame = () => {
     const correctPosition = { left: currentPoint.left, top: currentPoint.top };
 
     const distance = calculateDistance(dropPosition, correctPosition);
-    const isCorrect = distance < 8; // 8% tolerance
+    const isCorrect = distance < 10; // Increased tolerance to 10% for better user experience
 
     const timeTaken = 30 - timeLeft;
 
@@ -366,7 +364,7 @@ const GeographyGame = () => {
     const correctPosition = { left: currentPoint.left, top: currentPoint.top };
 
     const distance = calculateDistance(dropPosition, correctPosition);
-    const isCorrect = distance < 8;
+    const isCorrect = distance < 10;
 
     const timeTaken = 30 - timeLeft;
 
@@ -439,38 +437,119 @@ const GeographyGame = () => {
     );
   }
 
-  // Game Complete Screen
+  // Game Complete Screen - improved layout and navigation
   if (gameState === 'completed') {
     const correctAnswers = gameResults.filter(r => r.correct).length;
     const totalQuestions = gameResults.length;
     const percentage = Math.round((correctAnswers / totalQuestions) * 100);
 
     return (
-      <div className="game-container complete-screen">
-        <div className="complete-content">
-          <h1 className="complete-title">{texts[language].gameOver}</h1>
-          <div className="trophy-icon">🏆</div>
-          <div className="final-score">{texts[language].finalScore}: {score}</div>
-          <div className="score-details">
+      <div className="game-container complete-screen" style={{
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '20px'
+      }}>
+        <div className="complete-content" style={{
+          background: 'rgba(255,255,255,0.95)',
+          borderRadius: '20px',
+          padding: '40px',
+          boxShadow: '0 15px 40px rgba(0,0,0,0.2)',
+          maxWidth: '600px',
+          width: '100%',
+          textAlign: 'center'
+        }}>
+          <h1 className="complete-title" style={{
+            fontSize: '2.5rem',
+            background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            margin: '0 0 20px 0',
+            fontWeight: 'bold'
+          }}>{texts[language].gameOver}</h1>
+          <div className="trophy-icon" style={{
+            fontSize: '5rem',
+            margin: '20px 0'
+          }}>🏆</div>
+          <div className="final-score" style={{
+            fontSize: '2rem',
+            color: '#2d3748',
+            fontWeight: 'bold',
+            margin: '20px 0'
+          }}>{texts[language].finalScore}: {score}</div>
+          <div className="score-details" style={{
+            fontSize: '1.2rem',
+            color: '#666',
+            marginBottom: '40px'
+          }}>
             {correctAnswers}/{totalQuestions} ({percentage}%)
           </div>
           
-          <div className="complete-buttons">
+          <div className="complete-buttons" style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '15px',
+            alignItems: 'center'
+          }}>
             <button
               onClick={() => startGame(currentMap)}
               className="play-again-button"
+              style={{
+                background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                color: 'white',
+                border: 'none',
+                padding: '15px 30px',
+                borderRadius: '25px',
+                fontSize: '16px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                minWidth: '200px',
+                transition: 'transform 0.2s ease'
+              }}
+              onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+              onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
             >
               {texts[language].playAgain}
             </button>
             <button
               onClick={backToLevels}
               className="back-levels-button"
+              style={{
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                color: 'white',
+                border: 'none',
+                padding: '12px 25px',
+                borderRadius: '20px',
+                fontSize: '14px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                minWidth: '180px',
+                transition: 'transform 0.2s ease'
+              }}
+              onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+              onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
             >
               {texts[language].backToLevels}
             </button>
             <button
               onClick={resetGame}
               className="menu-button"
+              style={{
+                background: 'linear-gradient(135deg, #fd79a8 0%, #fdcbf1 100%)',
+                color: 'white',
+                border: 'none',
+                padding: '10px 20px',
+                borderRadius: '15px',
+                fontSize: '14px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                minWidth: '160px',
+                transition: 'transform 0.2s ease'
+              }}
+              onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+              onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
             >
               {texts[language].backToMenu}
             </button>
@@ -570,12 +649,12 @@ const GeographyGame = () => {
                 className="map-container"
                 style={{
                   background: mapConfigs[currentMap].bgImage || mapConfigs[currentMap].bgColor,
-                  backgroundSize: 'contain', // Changed from 'cover' to 'contain'
+                  backgroundSize: 'contain',
                   backgroundPosition: 'center',
                   backgroundRepeat: 'no-repeat',
                   width: '100%',
                   height: '100%',
-                  minHeight: '500px', // Added minimum height
+                  minHeight: '500px',
                   position: 'relative'
                 }}
                 onDrop={handleDrop}
@@ -589,7 +668,7 @@ const GeographyGame = () => {
                   {mapConfigs[currentMap].name[language]}
                 </div>
                 
-                {/* Placed markers */}
+                {/* Player placed markers */}
                 {placedMarkers.map((marker, index) => (
                   <div key={index}>
                     {/* User's placement */}
@@ -637,6 +716,34 @@ const GeographyGame = () => {
             </div>
           </div>
         </div>
+        
+        {/* CSS Animations - Added directly to component */}
+        <style jsx>{`
+          @keyframes pulse {
+            0% {
+              box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+            }
+            70% {
+              box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+            }
+            100% {
+              box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+            }
+          }
+          
+          .marker:hover .marker-tooltip {
+            opacity: 1 !important;
+          }
+          
+          .drag-item:active {
+            transform: scale(0.95) !important;
+          }
+          
+          .map-card:hover {
+            transform: translateY(-5px) !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
+          }
+        `}</style>
       </div>
     </div>
   );
