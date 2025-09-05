@@ -1,17 +1,23 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './GeographyGame.css';
+import TamilNaduMap from './assets/TamilNaduMap.png';
+import IndiaMap from './assets/IndiaMap.png';
+import IndianRiverMap from './assets/IndianRiverMap.png';
+import WorldMap from './assets/WorldMap.png';
 
 // Data for different maps with exact coordinates
 const tamilNaduPoints = [
-  { name: "Chennai", tamil: "சென்னை", top: "18%", left: "82%" },
-  { name: "Coimbatore", tamil: "கோயம்புத்தூர்", top: "63%", left: "32%" },
-  { name: "Madurai", tamil: "மதுரை", top: "75%", left: "55%" },
-  { name: "Trichy", tamil: "திருச்சி", top: "60%", left: "55%" },
-  { name: "Salem", tamil: "சேலம்", top: "50%", left: "40%" },
-  { name: "Kanyakumari", tamil: "கன்னியாகுமரி", top: "92%", left: "65%" },
-  { name: "Vellore", tamil: "வேலூர்", top: "32%", left: "58%" },
-  { name: "Tanjore", tamil: "தஞ்சாவூர்", top: "68%", left: "62%" }
+  { name: "Chennai", tamil: "சென்னை", top: "18%", left: "84%" },
+  { name: "Coimbatore", tamil: "கோயம்புத்தூர்", top: "66%", left: "30%" },
+  { name: "Madurai", tamil: "மதுரை", top: "77%", left: "52%" },
+  { name: "Trichy", tamil: "திருச்சி", top: "63%", left: "56%" },
+  { name: "Salem", tamil: "சேலம்", top: "48%", left: "44%" },
+  { name: "Kanyakumari", tamil: "கன்னியாகுமரி", top: "94%", left: "64%" },
+  { name: "Vellore", tamil: "வேலூர்", top: "30%", left: "56%" },
+  { name: "Tanjore", tamil: "தஞ்சாவூர்", top: "70%", left: "61%" }
 ];
+
+
 
 const indiaPoints = [
   { name: "New Delhi", tamil: "புது டெல்லி", top: "25%", left: "42%" },
@@ -564,9 +570,13 @@ const GeographyGame = () => {
                 className="map-container"
                 style={{
                   background: mapConfigs[currentMap].bgImage || mapConfigs[currentMap].bgColor,
-                  backgroundSize: 'cover',
+                  backgroundSize: 'contain', // Changed from 'cover' to 'contain'
                   backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat'
+                  backgroundRepeat: 'no-repeat',
+                  width: '100%',
+                  height: '100%',
+                  minHeight: '500px', // Added minimum height
+                  position: 'relative'
                 }}
                 onDrop={handleDrop}
                 onDragOver={(e) => e.preventDefault()}
