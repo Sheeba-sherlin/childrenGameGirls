@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import "./App.css";
 
 // Import all game components
@@ -11,6 +11,64 @@ import GFGWordGame from './GFGWordGame';
 import ScienceQuiz from './ScienceQuiz';
 import LabExperiment from './LabExperiment';
 import GeographyMappping from './GeographyMapping';
+import BiologyGame from './BiologyGame';
+
+// Universal Header Component
+const UniversalHeader = () => {
+  const location = useLocation();
+  
+  // Get game title based on current path
+  const getGameTitle = () => {
+    switch (location.pathname) {
+      case '/imageWord':
+        return 'Image Word Identification';
+      case '/timedImage':
+        return 'Timed Image Recognition';
+      case '/2048':
+        return 'Play Upto 2048';
+      case '/mathQuiz':
+        return 'Math Quiz';
+      case '/wordGame':
+        return 'Word Guess Game';
+      case '/scienceQuiz':
+        return 'Science Quiz';
+      case '/labExperiments':
+        return 'Lab Experiments';
+      case '/GeographyMapping':
+        return 'Geography Mapping';
+      case '/BiologyGame':
+        return 'Biology Game';
+      case '/':
+      default:
+        return '';
+    }
+  };
+
+  return (
+    <header className="universal-header">
+      <div className="header-content">
+        <h1 className="expo-title">Science Park Expo Thiruvallur</h1>
+        <h2 className="game-title">{getGameTitle()}</h2>
+        {location.pathname !== '/' && (
+          <Link to="/" className="back-to-menu">
+            🏠 Back to Menu
+          </Link>
+        )}
+      </div>
+    </header>
+  );
+};
+
+// Universal Footer Component
+const UniversalFooter = () => {
+  return (
+    <footer className="universal-footer">
+      <div className="footer-content">
+        <p className="college-credit">Designed and Developed by RMK College</p>
+      </div>
+    </footer>
+  );
+};
 
 // Game Icon Component
 const GameIcon = ({ emoji, title, to }) => (
@@ -31,17 +89,18 @@ const GameIcon = ({ emoji, title, to }) => (
 const GameSelection = () => (
   <div className="games-grid">
     <GameIcon emoji="🎮" title="Image Word Identification" to="/imageWord" />
-    <GameIcon emoji="⏱️" title="Timed Image Recognition" to="/timedImage" />
+    <GameIcon emoji="⏱" title="Timed Image Recognition" to="/timedImage" />
     <GameIcon emoji="🎲" title="Play Upto 2048" to="/2048" />
     <GameIcon emoji="➕" title="Math Quiz" to="/mathQuiz" />
     <GameIcon emoji="🔤" title="Word Guess Game" to="/wordGame" />
     <GameIcon emoji="🔬" title="Science Quiz" to="/scienceQuiz" />
     <GameIcon emoji="🧪" title="Lab Experiments" to="/labExperiments" />
-    <GameIcon emoji="🗺️" title="Maps" to ="/GeographyMapping"/>
+    <GameIcon emoji="🗺" title="Geography Mapping" to="/GeographyMapping" />
+    <GameIcon emoji="🫀" title="Biology Game" to="/BiologyGame" />
   </div>
 );
 
-// Home Page
+// Home Page Component
 const Home = () => {
   const quotes = [
     "Science is not only compatible with spirituality; it is a profound source of spirituality. - Carl Sagan",
@@ -53,44 +112,131 @@ const Home = () => {
     "Everything is theoretically impossible until it is done. - Robert A. Heinlein",
     "We are made of star-stuff. - Carl Sagan"
   ];
+  
   const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
   return (
     <div className="main-container">
       <header className="header-section">
-        <h1 className="main-title">Interactive Children's Educational Gaming App</h1>
+        <h2 className="main-title">MixMasti</h2>
         <p className="game-selection-prompt">Select a game to begin playing!</p>
       </header>
-
+      
       <div className="games-section">
         <GameSelection />
       </div>
-
+      
       <footer className="footer-section">
         <p className="quote-text">"{randomQuote}"</p>
+        
       </footer>
     </div>
   );
 };
 
+// Game Wrapper Component for consistent styling
+const GameWrapper = ({ children }) => {
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <div className="game-fullscreen-wrapper">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Main App Component
 function App() {
   return (
     <Router>
       <div className="min-h-screen app-bg">
+        {/* Universal Header - Always visible */}
+        <UniversalHeader />
+        
+        {/* Main Routes */}
         <Routes>
           {/* Home Page */}
           <Route path="/" element={<Home />} />
-
-          {/* Game Routes */}
-          <Route path="/imageWord" element={<ImageWordIdentification />} />
-          <Route path="/timedImage" element={<TimedImageRecognition />} />
-          <Route path="/2048" element={<Game2048 />} />
-          <Route path="/mathQuiz" element={<MathQuiz />} />
-          <Route path="/wordGame" element={<GFGWordGame />} />
-          <Route path="/scienceQuiz" element={<ScienceQuiz />} />
-          <Route path="/labExperiments" element={<LabExperiment />} />
-          <Route path="GeographyMapping" element={<GeographyMappping/>} />
+          
+          {/* Game Routes - Each wrapped in GameWrapper for fullscreen experience */}
+          <Route 
+            path="/imageWord" 
+            element={
+              <GameWrapper>
+                <ImageWordIdentification />
+              </GameWrapper>
+            } 
+          />
+          <Route 
+            path="/timedImage" 
+            element={
+              <GameWrapper>
+                <TimedImageRecognition />
+              </GameWrapper>
+            } 
+          />
+          <Route 
+            path="/2048" 
+            element={
+              <GameWrapper>
+                <Game2048 />
+              </GameWrapper>
+            } 
+          />
+          <Route 
+            path="/mathQuiz" 
+            element={
+              <GameWrapper>
+                <MathQuiz />
+              </GameWrapper>
+            } 
+          />
+          <Route 
+            path="/wordGame" 
+            element={
+              <GameWrapper>
+                <GFGWordGame />
+              </GameWrapper>
+            } 
+          />
+          <Route 
+            path="/scienceQuiz" 
+            element={
+              <GameWrapper>
+                <ScienceQuiz />
+              </GameWrapper>
+            } 
+          />
+          <Route 
+            path="/labExperiments" 
+            element={
+              <GameWrapper>
+                <LabExperiment />
+              </GameWrapper>
+            } 
+          />
+          <Route 
+            path="/GeographyMapping" 
+            element={
+              <GameWrapper>
+                <GeographyMappping />
+              </GameWrapper>
+            } 
+          />
+          <Route 
+            path="/BiologyGame" 
+            element={
+              <GameWrapper>
+                <BiologyGame />
+              </GameWrapper>
+            } 
+          />
         </Routes>
+        
+        {/* Universal Footer - Always visible */}
+        <UniversalFooter />
       </div>
     </Router>
   );
