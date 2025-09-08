@@ -256,7 +256,7 @@ const QuizFeedback = ({ message, type, correctAnswer, language, onClose }) => {
       setShowConfetti(true);
     }
     const timer = setTimeout(() => {
-      onClose && onClose();
+      if (onClose) onClose();
     }, 2500);
 
     return () => clearTimeout(timer);
@@ -372,6 +372,13 @@ export default function App() {
       setCurrentScreen("results");
     }
   }, [currentQuestionIndex, shuffledQuestions.length]);
+
+  // Handle feedback close - this was the missing function
+  const handleFeedbackClose = useCallback(() => {
+    setTimeout(() => {
+      handleNextQuestion();
+    }, 500);
+  }, [handleNextQuestion]);
 
   // Timer effect
   useEffect(() => {
@@ -573,7 +580,7 @@ export default function App() {
               style={{
                 width: '100%',
                 padding: '1rem',
-                background: `${color}dd`,
+                background:` ${color}dd`,
                 color: 'white',
                 border: 'none',
                 borderRadius: '0.75rem',
@@ -977,7 +984,7 @@ export default function App() {
           textAlign: 'center'
         }}>
           <div style={{ marginBottom: '1.5rem', fontSize: '4rem' }}>
-            {isHighScore ? '🏆' : isMediumScore ? '🎖️' : '📚'}
+            {isHighScore ? '🏆' : isMediumScore ? '🎖' : '📚'}
           </div>
           
           <h1 style={{

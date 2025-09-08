@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react
 import "./App.css";
 
 // Import all game components
-import ImageWordIdentification from './ImageWordIdentification';
-import TimedImageRecognition from './TimedImageRecognition';
 import Game2048 from './Game2048';
 import MathQuiz from './MathQuiz';
 import GFGWordGame from './GFGWordGame';
@@ -13,74 +11,30 @@ import LabExperiment from './LabExperiment';
 import GeographyMappping from './GeographyMapping';
 import BiologyGame from './BiologyGame';
 
-// Universal Header Component
-const UniversalHeader = () => {
+// Back Button Component - Only shows in games
+const BackButton = () => {
   const location = useLocation();
   
-  // Get game title based on current path
-  const getGameTitle = () => {
-    switch (location.pathname) {
-      case '/imageWord':
-        return 'Image Word Identification';
-      case '/timedImage':
-        return 'Timed Image Recognition';
-      case '/2048':
-        return 'Play Upto 2048';
-      case '/mathQuiz':
-        return 'Math Quiz';
-      case '/wordGame':
-        return 'Word Guess Game';
-      case '/scienceQuiz':
-        return 'Science Quiz';
-      case '/labExperiments':
-        return 'Lab Experiments';
-      case '/GeographyMapping':
-        return 'Geography Mapping';
-      case '/BiologyGame':
-        return 'Biology Game';
-      case '/':
-      default:
-        return '';
-    }
-  };
+  // Only show on game pages (not on home page)
+  if (location.pathname === '/') {
+    return null;
+  }
 
   return (
-    <header className="universal-header">
-      <div className="header-content">
-        <h1 className="expo-title">Science Park Expo Thiruvallur</h1>
-        <h2 className="game-title">{getGameTitle()}</h2>
-        {location.pathname !== '/' && (
-          <Link to="/" className="back-to-menu">
-            🏠 Back to Menu
-          </Link>
-        )}
-      </div>
-    </header>
-  );
-};
-
-// Universal Footer Component
-const UniversalFooter = () => {
-  return (
-    <footer className="universal-footer">
-      <div className="footer-content">
-        <p className="college-credit">Designed and Developed by RMK College</p>
-      </div>
-    </footer>
+    <Link to="/" className="back-btn">
+      ← Back to Menu
+    </Link>
   );
 };
 
 // Game Icon Component
 const GameIcon = ({ emoji, title, to }) => (
   <Link to={to} className="game-icon-container">
-    <div
-      className={`game-icon flex flex-col items-center justify-center cursor-pointer 
-      hover:shadow-xl transition-all duration-300 bg-white`}
-    >
-      <span className="text-5xl mb-4" role="img" aria-label={title}>
+    <div className="game-icon">
+      <span role="img" aria-label={title}>
         {emoji}
       </span>
-      <h3 className="text-center font-medium">{title}</h3>
+      <h3>{title}</h3>
     </div>
   </Link>
 );
@@ -88,8 +42,6 @@ const GameIcon = ({ emoji, title, to }) => (
 // Game Selection Component
 const GameSelection = () => (
   <div className="games-grid">
-    <GameIcon emoji="🎮" title="Image Word Identification" to="/imageWord" />
-    <GameIcon emoji="⏱" title="Timed Image Recognition" to="/timedImage" />
     <GameIcon emoji="🎲" title="Play Upto 2048" to="/2048" />
     <GameIcon emoji="➕" title="Math Quiz" to="/mathQuiz" />
     <GameIcon emoji="🔤" title="Word Guess Game" to="/wordGame" />
@@ -128,13 +80,12 @@ const Home = () => {
       
       <footer className="footer-section">
         <p className="quote-text">"{randomQuote}"</p>
-        
       </footer>
     </div>
   );
 };
 
-// Game Wrapper Component for consistent styling
+// Game Wrapper Component for fullscreen games
 const GameWrapper = ({ children }) => {
   return (
     <div className="modal-overlay">
@@ -152,31 +103,15 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen app-bg">
-        {/* Universal Header - Always visible */}
-        <UniversalHeader />
+        {/* Back Button - Shows only on game pages */}
+        <BackButton />
         
         {/* Main Routes */}
         <Routes>
           {/* Home Page */}
           <Route path="/" element={<Home />} />
           
-          {/* Game Routes - Each wrapped in GameWrapper for fullscreen experience */}
-          <Route 
-            path="/imageWord" 
-            element={
-              <GameWrapper>
-                <ImageWordIdentification />
-              </GameWrapper>
-            } 
-          />
-          <Route 
-            path="/timedImage" 
-            element={
-              <GameWrapper>
-                <TimedImageRecognition />
-              </GameWrapper>
-            } 
-          />
+          {/* Game Routes */}
           <Route 
             path="/2048" 
             element={
@@ -234,9 +169,6 @@ function App() {
             } 
           />
         </Routes>
-        
-        {/* Universal Footer - Always visible */}
-        <UniversalFooter />
       </div>
     </Router>
   );

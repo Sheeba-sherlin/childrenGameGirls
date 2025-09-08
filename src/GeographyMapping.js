@@ -7,14 +7,14 @@ import WorldMap from './assets/WorldMap.png';
 
 // Updated coordinates based on the map screenshots
 const tamilNaduPoints = [
-  { name: "Chennai", tamil: "சென்னை", top: "22%", left: "63%" },
-  { name: "Coimbatore", tamil: "கோயம்புத்தூர்", top: "52%", left: "39%" },
-  { name: "Madurai", tamil: "மதுரை", top: "57%", left: "47%" },
-  { name: "Salem", tamil: "சேலம்", top: "37%", left: "41%" },
-  { name: "Trichy", tamil: "திருச்சி", top: "43%", left: "50%" },
-  { name: "Vellore", tamil: "வேலூர்", top: "30%", left: "55%" },
-  { name: "Tanjore", tamil: "தஞ்சாவூர்", top: "48%", left: "59%" },
-  { name: "Kanyakumari", tamil: "கன்னியாகுமரி", top: "80%", left: "42%" }
+  { name: "Chennai", tamil: "சென்னை", top: "11%", left: "70%" },
+  { name: "Coimbatore", tamil: "கோயம்புத்தூர்", top: "52%", left: "36%" },
+  { name: "Madurai", tamil: "மதுரை", top: "64%", left: "47%" },
+  { name: "Salem", tamil: "சேலம்", top: "35%", left: "47%" },
+  { name: "Trichy", tamil: "திருச்சி", top: "46%", left: "53%" },
+  { name: "Vellore", tamil: "வேலூர்", top: "14%", left: "57%" },
+  { name: "Tanjore", tamil: "தஞ்சாவூர்", top: "52%", left: "60.5%" },
+  { name: "Kanyakumari", tamil: "கன்னியாகுமரி", top: "95%", left: "41%" }
 ];
 
 const indiaPoints = [
@@ -23,28 +23,28 @@ const indiaPoints = [
   { name: "TamilNadu", tamil: "தமிழ்நாடு", top: "83%", left: "44%" },
   { name: "WestBengal", tamil: "மேற்கு வங்காளம்", top: "48%", left: "60%" },
   { name: "Karnataka", tamil: "கர்நாடகா", top: "72%", left: "39%" },
-  { name: "Telgana", tamil: "தெலங்கானா", top: "72%", left: "45%" },
+  { name: "Telgana", tamil: "தெலங்கானா", top: "65%", left: "45%" },
   { name: "Rajastan", tamil: "ராஜஸ்தான்", top: "39%", left: "37%" },
-  { name: "Goa", tamil: "கோவா", top: "72%", left: "36%" }
+  { name: "Goa", tamil: "கோவா", top: "70%", left: "36%" }
 ];
 
 const riverPoints = [
-  { name: "Ganga", tamil: "கங்கை", top: "35.5%", left: "49%" },
+  { name: "Ganga", tamil: "கங்கை", top: "36%", left: "48.5%" },
   { name: "Yamuna", tamil: "யமுனை", top: "40%", left: "48.5%" },
   { name: "Brahmaputra", tamil: "பிரம்மபுத்திரா", top: "33%", left: "55%" },
   { name: "Narmada", tamil: "நர்மதா", top: "47.5%", left: "45%" },
-  { name: "Godavari", tamil: "கோதாவரி", top: "55%", left: "47%" },
+  { name: "Godavari", tamil: "கோதாவரி", top: "53%", left: "47%" },
   { name: "Krishna", tamil: "கிருஷ்ணா", top: "58%", left: "47%" },
   { name: "Kaveri", tamil: "காவேரி", top: "68%", left: "45%" }
 ];
 
 const worldPoints = [
-  { name: "India", tamil: "இந்தியா", top: "48%", left: "66%" },
+  { name: "India", tamil: "இந்தியா", top: "55%", left: "68%" },
   { name: "USA", tamil: "அமெரிக்கா", top: "40%", left: "20%" },
-  { name: "Australia", tamil: "ஆஸ்திரேலியா", top: "80%", left: "82%" },
-  { name: "China", tamil: "சீனா", top: "42%", left: "70%" },
-  { name: "Brazil", tamil: "பிரேசில்", top: "70%", left: "32%" },
-  { name: "South Africa", tamil: "தென்னாப்பிரிக்கா", top: "79%", left: "50%" },
+  { name: "Australia", tamil: "ஆஸ்திரேலியா", top: "77%", left: "82%" },
+  { name: "China", tamil: "சீனா", top: "44%", left: "73%" },
+  { name: "Brazil", tamil: "பிரேசில்", top: "70%", left: "30%" },
+  { name: "South Africa", tamil: "தென்னாப்பிரிக்கா", top: "78%", left: "52%" },
   { name: "Egypt", tamil: "எகிப்து", top: "48%", left: "48%" }
 ];
 
@@ -107,8 +107,7 @@ const GeographyGame = () => {
 
   const texts = {
     english: {
-      title: "Geography Explorer",
-      subtitle: "Learn by Dragging and Dropping!",
+  
       selectMap: "Choose a Map",
       startGame: "Start Game",
       score: "Score",
